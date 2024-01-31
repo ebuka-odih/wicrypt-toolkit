@@ -15,11 +15,11 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        $admin = User::where('email', '=', 'admin@site.com')->first();
+        $admin = User::where('email', '=', 'admin@mydevice.com')->first();
         if($admin === null){
             DB::table('users')->insert([
                 'name' => 'Admin Panel',
-                'email' => 'admin@site.com',
+                'email' => 'admin@mydevice.com',
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'password' => Hash::make('ADMIN12PASS'),
             ]);
