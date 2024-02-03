@@ -122,7 +122,7 @@
                         </a>
                     </li>
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ route('device.index') }}">
+                        <a class="nav-main-link" href="{{ route('appdata.index') }}">
                             <i class="nav-main-link-icon fa fa-chart-area"></i>
                             <span class="nav-main-link-name">Devices</span>
                         </a>

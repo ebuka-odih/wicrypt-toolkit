@@ -20,30 +20,29 @@
 
             <div class="block-content">
                 <div class="table-responsive">
+
                     <table class="table table-bordered table-striped table-vcenter">
                         <thead>
                         <tr>
-                            <th class="text-center" style="width: 200px;">
-                                <i class="far fa-clock"></i>
-                            </th>
-                            <th>Network</th>
-                            <th>Status</th>
+                            <th>ID</th>
+                            <th>Device ID</th>
+                            <th>WiFi Name</th>
+                            <th>Online Status</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="text-center">
-                                <span>#1</span>
-                            </td>
-                            <td class="fw-semibold">
-                                Encode 1
-                            </td>
-                            <td>
-                                <i class="fa fa-dot-circle text-success"></i> Online
-                            </td>
-                        </tr>
-
-
+                        @foreach($appData as $data)
+                            <tr>
+                                <td>{{ $data->id }}</td>
+                                <td>{{ $data->device_id }}</td>
+                                <td>{{ $data->wifi_name }}</td>
+                                <td>{{ $data->online_status ? 'Online' : 'Offline' }}</td>
+                                <td>{{ $data->created_at }}</td>
+                                <td>{{ $data->updated_at }}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

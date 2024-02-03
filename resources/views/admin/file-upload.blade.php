@@ -50,34 +50,50 @@
                                 <button class="btn btn-primary" type="submit">Submit</button>
                             </div>
                         </div>
-                        <hr>
-                        <br>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>File URL</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @forelse($file as $item)
-                                <tr>
-                                    <td>{{ date('d-M-Y', strtotime($item->created_at)) }}</td>
-                                    <td><a target="_blank" href="{{ $item->url }}">{{ $item->url }}</a></td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td>No File</td>
-                                </tr>
-                            @endforelse
-                            </tbody>
 
-                        </table>
 
                         <!-- END Basic Elements -->
 
                     </form>
                     <hr>
+                    <br>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>File URL</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($file as $item)
+                            <tr>
+                                <td>{{ date('d-M-Y', strtotime($item->created_at)) }}</td>
+                                <td><a target="_blank" href="{{ $item->url }}">{{ $item->url }}</a></td>
+                                <td>
+                                    <form method="POST" action="{!! route('file-upload.destroy', $item->id) !!}" accept-charset="UTF-8">
+                                        <input name="_method" value="DELETE" type="hidden">
+                                        {{ csrf_field() }}
+
+                                        <div class="btn-group btn-group-xs pull-right" role="group">
+                                            <button type="submit" class="btn btn-sm btn-alt-danger js-bs-tooltip-enabled" data-bs-toggle="tooltip" title="" data-bs-original-title="Delete" onclick="return confirm(&quot;Delete Item?&quot;)">
+                                                <i class="fa fa-times"></i> Delete
+                                            </button>
+
+                                        </div>
+
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td>No File</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+
+                    </table>
+
                 </div>
             </div>
             <!-- END Elements -->

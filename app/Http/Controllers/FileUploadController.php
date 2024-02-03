@@ -26,4 +26,21 @@ class FileUploadController extends Controller
 
         return redirect()->back()->with('message','File Uploaded Successfully');
     }
+
+    public function edit($id)
+    {
+
+    }
+
+    public function update($id)
+    {
+
+    }
+
+    public function destroy($id)
+    {
+        $file = FileUpload::findOrFail($id);
+        $file->delete();
+        return redirect()->back()->with('message', "File Deleted Successfully");
+    }
 }

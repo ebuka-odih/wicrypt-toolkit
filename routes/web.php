@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AppDataController;
 use App\Http\Controllers\DevicesController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\ProfileController;
@@ -29,7 +30,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/', [AdminController::class, 'index'])->name('index');
     Route::resource('/file-upload', FileUploadController::class);
-    Route::resource('/device', DevicesController::class);
+
+    Route::get('/app-data', [AppDataController::class, 'index'])->name('appdata.index');
+    Route::post('/app-data', [AppDataController::class, 'store'])->name('appdata.store');
+    Route::get('/app-data/{device_id}', [AppDataController::class, 'show'])->name('appdata.show');
+
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
