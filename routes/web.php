@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\AppDataController;
 use App\Http\Controllers\DevicesController;
 use App\Http\Controllers\FileUploadController;
@@ -25,6 +26,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/files/latest', [FileController::class, 'getLatestFileUrl']);
 
 Route::middleware('auth')->group(function () {
 
