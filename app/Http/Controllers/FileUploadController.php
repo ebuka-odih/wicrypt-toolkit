@@ -10,21 +10,26 @@ class FileUploadController extends Controller
 {
     public function index()
     {
-        $file = FileUpload::all();
+        $file = FileUpload::latest()->get();
         return view('admin.file-upload', compact('file'));
     }
 
     public function store(Request $request) {
+        // Retrieve the uploaded file from the request
         $file = $request->file('file');
-        $path = Storage::disk('s3')->put('files', $file);
-        $url = Storage::disk('s3')->url($path);
 
+        // Store the file in local storage (storage/app/public/files)
+        $path = $file->store('public/files');
+
+        // Generate a public URL for the stored file
+        $url = Storage::url($path);
+
+        // Create a new record in the database for the uploaded file
         $newFile = new FileUpload();
         $newFile->name = $file->getClientOriginalName();
         $newFile->url = $url;
         $newFile->save();
-
-        return redirect()->back()->with('message','File Uploaded Successfully');
+        return redirect()->back()->with('message', 'File Uploaded Successfully');
     }
 
     public function edit($id)
@@ -43,4 +48,6 @@ class FileUploadController extends Controller
         $file->delete();
         return redirect()->back()->with('message', "File Deleted Successfully");
     }
+
+
 }
