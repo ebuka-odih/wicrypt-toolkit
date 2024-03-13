@@ -15,7 +15,6 @@ class FileUploadController extends Controller
     }
 
     public function store(Request $request) {
-        // Retrieve the uploaded file from the request
         $file = $request->file('file');
 
         // Store the file in local storage (storage/app/public/files)
